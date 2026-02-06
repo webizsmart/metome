@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나에게서 나를 찾다 - 제122호</title>
+    <meta name="description" content="옛이야기 글방의 월간 문학 매거진 - 한시, 고사성어, 시를 통해 전통의 아름다움을 찾아갑니다">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a5acd;
+            --primary-light: #8a7aed;
+            --primary-dark: #4a3aad;
+            --accent: #ff6b9d;
+            --accent-gold: #d4af37;
+            --bg-primary: #fcfbf9;
+            --bg-secondary: #f5f3ef;
+            --text-primary: #2c2c2c;
+            --text-secondary: #666;
+            --text-tertiary: #999;
+            --border: #e0dcd5;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif KR', serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-30px) translateX(20px); }
+            50% { transform: translateY(-60px) translateX(-20px); }
+            75% { transform: translateY(-30px) translateX(30px); }
+        }
+
+        /* Header / Cover Section */
+        header {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f6ff 100%);
+            overflow: hidden;
+        }
+
+        .header-border {
+            position: absolute;
+            inset: 30px;
+            border: 3px solid transparent;
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--accent-gold)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderGlow 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .issue-badge {
+            display: inline-block;
+            font-size: 0.95rem;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 10px 30px;
+            border-radius: 50px;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            font-weight: 500;
+            background: rgba(106, 90, 205, 0.05);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1.2s ease-out 0.2s both;
+        }
+
+        .issue-badge:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(106, 90, 205, 0.3);
+        }
+
+        .main-title {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 900;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: fadeInUp 1.2s ease-out 0.4s both;
+            text-shadow: 0 0 30px rgba(106, 90, 205, 0.3);
+        }
+
+        .publisher {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            letter-spacing: 5px;
+            position: relative;
+            padding: 20px 0;
+            animation: fadeInUp 1.2s ease-out 0.6s both;
+        }
+
+        .publisher::before,
+        .publisher::after {
+            content: '◆';
+            position: absolute;
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .publisher::before { left: -40px; }
+        .publisher::after { right: -40px; }
+
+        /* Ornamental Divider */
+        .divider {
+            width: 100%;
+            max-width: 800px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 80px auto;
+            position: relative;
+        }
+
+        .divider::after {
+            content: '❖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: var(--primary);
+            font-size: 1.5rem;
+            padding: 0 20px;
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 180px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .category-tag {
+            display: inline-block;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            font-size: 0.85rem;
+            padding: 8px 24px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .category-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(106, 90, 205, 0.4);
+        }
+
+        /* Poetry Section */
+        .poetry-section {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .poetry-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .poetry-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        .poetry-section h2 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .poetry-section strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 40px;
+        }
+
+        .hanja-text {
+            font-size: 1.5rem;
+            line-height: 2.2;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+            font-weight: 400;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.03), rgba(255, 107, 157, 0.03));
+            border-radius: 15px;
+            border-left: 4px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .hanja-text:hover {
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.06), rgba(255, 107, 157, 0.06));
+            transform: translateX(5px);
+        }
+
+        .translation {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 2;
+            margin-bottom: 40px;
+            font-weight: 300;
+            padding-left: 20px;
+        }
+
+        blockquote {
+            border-left: 5px solid var(--primary);
+            padding: 25px 30px;
+            margin: 40px 0;
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.05), transparent);
+            border-radius: 0 15px 15px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        blockquote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: 'Playfair Display', serif;
+        }
+
+        blockquote:hover {
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.1), transparent);
+            padding-left: 40px;
+        }
+
+        /* Card UI for Idiom */
+        .card {
+            background: linear-gradient(135deg, #ffffff 0%, #faf9ff 100%);
+            padding: 60px;
+            border-radius: 25px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg at 50% 50%, 
+                rgba(106, 90, 205, 0.1) 0deg, 
+                transparent 60deg, 
+                transparent 300deg, 
+                rgba(255, 107, 157, 0.1) 360deg);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 35px 100px rgba(106, 90, 205, 0.2);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .idiom-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            background: linear-gradient(135deg, #d32f2f, #ff6b9d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            line-height: 1.3;
+        }
+
+        .card p {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .card strong {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Poem Section */
+        .poem-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poem-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent-gold));
+        }
+
+        .poem-section h2 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin: 30px 0 15px;
+            font-weight: 700;
+        }
+
+        .poem-section > p:nth-of-type(1) {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .poem-section > p:nth-of-type(2) {
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 2.2;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Classical Quote Section */
+        .quote-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: 25px;
+            color: white;
+            box-shadow: 0 25px 80px rgba(106, 90, 205, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            animation: movePattern 30s linear infinite;
+        }
+
+        @keyframes movePattern {
+            from { transform: translate(0, 0); }
+            to { transform: translate(30px, 30px); }
+        }
+
+        .quote-section .category-tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .quote-section h3 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin: 30px 0 20px;
+            font-weight: 700;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-section p {
+            font-size: 1.15rem;
+            line-height: 2;
+            position: relative;
+            z-index: 1;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 80px 30px;
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        footer p {
+            margin: 15px 0;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        footer p:first-child {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--accent-gold));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-border { inset: 15px; }
+            .main-title { font-size: 2.5rem; }
+            .publisher::before, .publisher::after { display: none; }
+            .container { padding: 80px 20px; }
+            .poetry-section, .card, .poem-section, .quote-section { padding: 40px 30px; }
+            .hanja-text { font-size: 1.2rem; padding: 20px; }
+            section { margin-bottom: 100px; }
+        }
+
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Selection Styling */
+        ::selection {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Background Particles -->
+    <div class="bg-particles" id="particles"></div>
+
+    <header>
+        <div class="header-border"></div>
+        <div class="header-content">
+            <div class="issue-badge">2026. 02 · 통권 122호</div>
+            <h1 class="main-title">나에게서 나를 찾다</h1>
+            <div class="publisher">옛이야기 글방</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <span class="category-tag">내 마음의 漢詩</span>
+            <div class="poetry-section">
+                <h2>雪後 (눈 내린 뒤)</h2>
+                <strong>이항복 (조선)</strong>
+                <div class="hanja-text">
+                    雪後山扉晩不開 (설후산비만불개)<br>
+                    溪橋日午少人來 (계교일오소인래)<br>
+                    篝爐伏火騰騰煖 (구로복화등등난)<br>
+                    茅栗如拳手自煨 (모율여권수자외)
+                </div>
+                <div class="translation">
+                    눈 온 뒤 산의 사립문은 늦도록 닫혀 있고<br>
+                    시내의 다리는 한낮에도 오가는 사람 적다<br>
+                    화로에 묻은 불에서는 온기가 모락모락<br>
+                    알 굵은 산밤을 혼자서 구워 먹네
+                </div>
+                <blockquote>
+                    만족할 마음 없으면 모든 게 괴로움일텐데...
+                </blockquote>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section>
+            <span class="category-tag">고사만사(故事萬事)</span>
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="idiom-title">守株待兔</h2>
+                    <p><strong>수주대토:</strong> 그루터기를 지키며 토끼를 기다리다.</p>
+                    <p>고지식하고 융통성이 없어 구습과 전례만 고집하는 어리석음을 비유합니다.</p>
+                    <p style="opacity: 0.7; font-size: 0.95rem; margin-top: 30px;">출전: 한비자</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section>
+            <span class="category-tag">내 마음의 詩</span>
+            <div class="poem-section">
+                <h2>평사리에서</h2>
+                <p>민 병 일</p>
+                <p>
+                    악양 들녘 내려보는 마음에<br>
+                    어머니 눈웃음 닮은 돌각담 길<br>
+                    조붓조붓 나 있습니다<br><br>
+                    보리밭 실개천 지나<br>
+                    앵두 가지마다 불 밝힌<br>
+                    오롯한 풍경을 보셨는지요
+                </p>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <section>
+            <div class="quote-section">
+                <span class="category-tag">고전(古典) 한마디</span>
+                <h3>"前事之不忘 後事之師"</h3>
+                <p>(전사지불망 후사지사)</p>
+                <p>지난 일을 잊지 않는 것은 뒷일의 스승이 된다.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>옛이야기 글방 📖</p>
+        <p>&copy; 2026 나에게서 나를 찾다. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Generate Background Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Intersection Observer for scroll animations (fallback for browsers without animation-timeline)
+        if (!CSS.supports('animation-timeline', 'view()')) {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
+</body>
+</html>
